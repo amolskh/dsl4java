@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Suite" parallel="false">
+    <test name="TC_001">
+        <parameter name="tc_Name" value="TC_001"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+</suite>

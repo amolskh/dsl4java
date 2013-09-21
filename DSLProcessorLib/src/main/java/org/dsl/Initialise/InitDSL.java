@@ -1,11 +1,7 @@
 package org.dsl.Initialise;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,12 +28,12 @@ import org.reflections.util.FilterBuilder;
 public class InitDSL
 {
 	static Class<?> dslClass = null;
-	static List dslCommands = new ArrayList();
+	static List<String> dslCommands = new ArrayList<String>();
 	public static Map runTimeVars = new HashMap();
 	public static Map methodCommandMapping = new HashMap();
 	public static Properties prop;
 
-	public static void initialise()
+	public static void initialise(String testCase)
 	{
 		try
 		{
@@ -72,7 +68,7 @@ public class InitDSL
 				methodCommandMapping.put(commandSyntax, dslObj);
 			}
 		}
-			readFile();		
+			readFile(testCase);		
 
 			for (int j=0; j < dslCommands.size(); j++) {
 				Iterator it = methodCommandMapping.entrySet().iterator();
@@ -101,9 +97,12 @@ public class InitDSL
 		prop.load(in);
 	}
 
-	public static void readFile() {
+	/*public static void readFile(String test) {
+		
+		System.out.println("^^^^^^^^^^^^^^^^"+test);
 		try {
-			InputStream finStream = InitDSL.class.getClassLoader().getResourceAsStream("demo.dsl"); 
+			//InputStream finStream = InitDSL.class.getClassLoader().getResourceAsStream("demo.dsl"); 
+			InputStream finStream = InitDSL.class.getClassLoader().getResourceAsStream(test);
 			DataInputStream dinStream = new DataInputStream(finStream);
 			BufferedReader buReader = new BufferedReader(new InputStreamReader(
 					dinStream));
@@ -126,6 +125,25 @@ public class InitDSL
 		catch (IOException e) {
 			e.printStackTrace();
 		}    
+	}*/
+	
+	public static void readFile(String testCase) {			
+		String testSteps[] = testCase.split("\n");
+		String strLine;
+
+		for(int i=0;i<testSteps.length;i++)
+		{	
+			strLine=testSteps[i];
+
+			if (strLine.contains("Assign")) {
+				String[] cmd = strLine.split(" Assign ");
+				dslCommands.add(cmd[0]);
+				dslCommands.add("Assign " + cmd[1]);
+
+			} else {
+				dslCommands.add(strLine);
+			}
+		}		
 	}
 
 	public static Object invokeMethod(DSLObject dslObj, String command) {

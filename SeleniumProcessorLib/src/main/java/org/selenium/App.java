@@ -1,6 +1,9 @@
 package org.selenium;
 
 import org.dsl.Initialise.InitDSL;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class App 
 {
@@ -23,9 +26,18 @@ public class App
         Thread.sleep(10000);
         driver.quit();*/
         
-    	InitDSL.initialise();
+    	//InitDSL.initialise();
     	
     	//Thread.sleep(10000);
+    	
+    	WebDriver driver = new FirefoxDriver();
+    	driver.get("http://www.gmail.com");
+    	driver.findElement(By.id("Email")).sendKeys("admin");
+    	driver.findElement(By.id("Passwd")).sendKeys("test");
+    	driver.close();
+    	
+    	
+    	
         
     }
 }
