@@ -127,7 +127,8 @@ public class InitDSL
 		}    
 	}*/
 	
-	public static void readFile(String testCase) {			
+	public static void readFile(String testCase) {	
+		dslCommands.clear();
 		String testSteps[] = testCase.split("\n");
 		String strLine;
 
