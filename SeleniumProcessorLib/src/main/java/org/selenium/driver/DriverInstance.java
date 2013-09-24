@@ -1,5 +1,7 @@
 package org.selenium.driver;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -16,6 +18,7 @@ public class DriverInstance {
 				if (driverInstance == null ) {
 					driverInstance = new DriverInstance();
 					browser = new FirefoxDriver();
+					browser.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 				}
 			}
 		}

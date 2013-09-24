@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="10012" started-at="2013-09-23T17:45:28Z" finished-at="2013-09-23T17:45:38Z">
+    <groups>
+    </groups>
+    <test name="TC_002" duration-ms="10012" started-at="2013-09-23T17:45:28Z" finished-at="2013-09-23T17:45:38Z">
+      <class name="org.sample.ParameterTest">
+        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@62b9d3]" name="createExcelHash" is-config="true" duration-ms="1530" started-at="2013-09-23T23:15:26Z" finished-at="2013-09-23T23:15:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createExcelHash -->
+        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@62b9d3]" name="testExecMethod" duration-ms="9996" started-at="2013-09-23T23:15:28Z" finished-at="2013-09-23T23:15:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[TC_002]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExecMethod -->
+      </class> <!-- org.sample.ParameterTest -->
+    </test> <!-- TC_002 -->
+  </suite> <!-- Suite -->
+</testng-results>

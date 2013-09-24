@@ -43,7 +43,7 @@ public class InitDSL
 			e.printStackTrace();
 		}
 
-		String packageList = prop.getProperty("className");
+		String packageList = prop.getProperty("packageName");
 		String[] pack= packageList.split("\\|");
 		for(int i=0;i<pack.length;i++){
 			Reflections reflections = new Reflections(new ConfigurationBuilder().filterInputsBy(new FilterBuilder().includePackage(pack[i]))
@@ -156,7 +156,10 @@ public class InitDSL
 		Object[] input = new Object[commandRegex.length];
 		Object result = null;
 		int cnt = 0;
-		if (command.matches(commandSyntax)) {
+		
+		Object[] orignalCommand;
+		Object[] userCommand;
+	/*	if (command.matches(commandSyntax)) {
 			Object[] orignalCommand = commandSyntax.split(" ");
 			Object[] userCommand = command.split(" ");
 			for (int i = 0; i < orignalCommand.length; i++) {
@@ -164,8 +167,23 @@ public class InitDSL
 					input[cnt] = userCommand[i];
 					cnt++;
 				}
+			}*/
+		
+		if (command.matches(commandSyntax)) {
+			if(command.contains("VerifyEqual")){
+				userCommand = command.split(" VerifyEqual ");
+				orignalCommand = commandSyntax.split(" VerifyEqual ");				
+			}			
+			else{			
+				orignalCommand = commandSyntax.split(" ");
+				userCommand = command.split(" ");
 			}
-
+			for (int i = 0; i < orignalCommand.length; i++) {
+				if (!orignalCommand[i].equals(userCommand[i])) {
+					input[cnt] = userCommand[i];
+					cnt++;
+				}
+			}
 			Class[] paramClass = m.getParameterTypes();
 			for (int i = 0; i < paramClass.length; i++) {
 				String classCastType = null;
@@ -203,6 +221,7 @@ public class InitDSL
 				e.printStackTrace();
 			}
 		}
+		
 		return result;
 	}
 }
