@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]">
-  <parameter name="tc_Name" value="TC_003"/>
+  <parameter name="tc_Name" value="TC_005"/>
   <test name="TC_001(failed)">
     <parameter name="tc_Name" value="TC_001"/>
     <classes>
       <class name="org.sample.ParameterTest">
         <methods>
+          <include name="createExcelHash"/>
           <include name="testExecMethod" invocation-numbers="0"/>
         </methods>
       </class> <!-- org.sample.ParameterTest -->
@@ -17,6 +18,7 @@
     <classes>
       <class name="org.sample.ParameterTest">
         <methods>
+          <include name="createExcelHash"/>
           <include name="testExecMethod" invocation-numbers="0"/>
         </methods>
       </class> <!-- org.sample.ParameterTest -->
@@ -27,9 +29,32 @@
     <classes>
       <class name="org.sample.ParameterTest">
         <methods>
+          <include name="createExcelHash"/>
           <include name="testExecMethod" invocation-numbers="0"/>
         </methods>
       </class> <!-- org.sample.ParameterTest -->
     </classes>
   </test> <!-- TC_003(failed) -->
+  <test name="TC_004(failed)">
+    <parameter name="tc_Name" value="TC_004"/>
+    <classes>
+      <class name="org.sample.ParameterTest">
+        <methods>
+          <include name="createExcelHash"/>
+          <include name="testExecMethod" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- org.sample.ParameterTest -->
+    </classes>
+  </test> <!-- TC_004(failed) -->
+  <test name="TC_005(failed)">
+    <parameter name="tc_Name" value="TC_005"/>
+    <classes>
+      <class name="org.sample.ParameterTest">
+        <methods>
+          <include name="createExcelHash"/>
+          <include name="testExecMethod" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- org.sample.ParameterTest -->
+    </classes>
+  </test> <!-- TC_005(failed) -->
 </suite> <!-- Failed suite [Suite] -->

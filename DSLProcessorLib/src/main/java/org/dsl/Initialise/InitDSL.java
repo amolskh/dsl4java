@@ -147,7 +147,7 @@ public class InitDSL
 		}		
 	}
 
-	public static Object invokeMethod(DSLObject dslObj, String command) {
+/*	public static Object invokeMethod(DSLObject dslObj, String command) {
 		Method m = dslObj.getM();
 		String oCommand = command;
 		String commandName = dslObj.getCommandName();
@@ -160,7 +160,7 @@ public class InitDSL
 		
 		Object[] orignalCommand;
 		Object[] userCommand;
-	/*	if (command.matches(commandSyntax)) {
+		if (command.matches(commandSyntax)) {
 			Object[] orignalCommand = commandSyntax.split(" ");
 			Object[] userCommand = command.split(" ");
 			for (int i = 0; i < orignalCommand.length; i++) {
@@ -168,7 +168,7 @@ public class InitDSL
 					input[cnt] = userCommand[i];
 					cnt++;
 				}
-			}*/
+			}
 		
 		if (command.matches(commandSyntax)) {
 			if(command.contains("VerifyEqual")){
@@ -222,6 +222,97 @@ public class InitDSL
 				e.printStackTrace();
 			}
 		}
+		
+		return result;
+	}*/
+	
+	
+	public static Object invokeMethod(DSLObject dslObj, String command) {
+		Method m = dslObj.getM();
+		String oCommand = command;
+		String commandName = dslObj.getCommandName();
+		String commandSyntax = dslObj.getCommandSyntax();
+		String[] commandRegex = dslObj.getCommandRegex();
+		commandSyntax = MessageFormat.format(commandSyntax, commandRegex);
+		Object[] input = new Object[commandRegex.length];
+		Object result = null;
+		int cnt = 0;
+		int i = 0;
+		int j=0;
+		
+		String[] orignalCommand = commandSyntax.split(" ");
+		String[] userCommand = command.split(" ");		
+		
+		while (i < orignalCommand.length) {
+			if (orignalCommand[i].equals(userCommand[cnt])) {
+				//System.out.println(orignalCommand[i] + " is neglected");
+				i++;
+				cnt++;
+			}  
+			else if (orignalCommand[i].matches(".*")) {
+				//System.out.println("Regex");
+				String inpVal = "";
+				if ((i + 1) < orignalCommand.length) {
+					i = i + 1;
+					String hold = orignalCommand[i];
+					while (i < orignalCommand.length && !hold.equals(userCommand[cnt])) {
+						inpVal = inpVal + userCommand[cnt]+" ";
+						cnt++;						
+					}
+				} else {
+					while (cnt < userCommand.length) {
+						inpVal = inpVal + userCommand[cnt]+" ";
+						cnt++;
+					}
+					i++;
+				}
+				if(j< input.length){
+				input[j]=inpVal.trim();
+				j++;
+				}
+			} else {
+				System.out.println("No match");
+				i++;
+				cnt++;
+			}
+		}
+			
+			Class[] paramClass = m.getParameterTypes();
+			for (i = 0; i < paramClass.length; i++) {
+				String classCastType = null;
+				if ("int".equals(paramClass[i].getName())) {
+					classCastType = "java.lang.Integer";
+					input[i] = Integer.valueOf(Integer.parseInt((String)input[i]));
+				} else {
+					classCastType = paramClass[i].getName();
+					try
+					{
+						Class classCast = Class.forName(classCastType);
+						input[i] = classCast.cast(input[i]);						
+					}
+					catch (ClassNotFoundException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+			try {
+				m.setAccessible(true);
+				Object calc = m.getDeclaringClass().newInstance();
+				result = m.invoke(calc, input);
+			}
+			catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			catch (InstantiationException e) {
+				e.printStackTrace();
+			}
+			catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}	
 		
 		return result;
 	}

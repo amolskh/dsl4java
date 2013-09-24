@@ -1,66 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="4" passed="4">
+<testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="18660" started-at="2013-09-24T11:07:26Z" finished-at="2013-09-24T11:07:44Z">
+  <suite name="Suite" duration-ms="80866" started-at="2013-09-24T18:36:01Z" finished-at="2013-09-24T18:37:22Z">
     <groups>
     </groups>
-    <test name="TC_001" duration-ms="6400" started-at="2013-09-24T11:07:26Z" finished-at="2013-09-24T11:07:32Z">
+    <test name="TC_005" duration-ms="80866" started-at="2013-09-24T18:36:01Z" finished-at="2013-09-24T18:37:22Z">
       <class name="org.sample.ParameterTest">
-        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@62b9d3]" name="testExecMethod" duration-ms="6387" started-at="2013-09-24T16:37:26Z" finished-at="2013-09-24T16:37:32Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[TC_001]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testExecMethod -->
-      </class> <!-- org.sample.ParameterTest -->
-    </test> <!-- TC_001 -->
-    <test name="TC_002" duration-ms="17" started-at="2013-09-24T11:07:32Z" finished-at="2013-09-24T11:07:32Z">
-      <class name="org.sample.ParameterTest">
-        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@dc5b6a]" name="testExecMethod" duration-ms="15" started-at="2013-09-24T16:37:32Z" finished-at="2013-09-24T16:37:32Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[TC_002]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testExecMethod -->
-      </class> <!-- org.sample.ParameterTest -->
-    </test> <!-- TC_002 -->
-    <test name="TC_003" duration-ms="4509" started-at="2013-09-24T11:07:32Z" finished-at="2013-09-24T11:07:37Z">
-      <class name="org.sample.ParameterTest">
-        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@151981a]" name="testExecMethod" duration-ms="4507" started-at="2013-09-24T16:37:32Z" finished-at="2013-09-24T16:37:37Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[TC_003]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testExecMethod -->
-      </class> <!-- org.sample.ParameterTest -->
-    </test> <!-- TC_003 -->
-    <test name="TC_004" duration-ms="7687" started-at="2013-09-24T11:07:37Z" finished-at="2013-09-24T11:07:44Z">
-      <class name="org.sample.ParameterTest">
-        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@1ca265]" name="createExcelHash" is-config="true" duration-ms="1558" started-at="2013-09-24T16:37:24Z" finished-at="2013-09-24T16:37:26Z">
+        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@1abbe6c]" name="createExcelHash" is-config="true" duration-ms="1527" started-at="2013-09-25T00:05:59Z" finished-at="2013-09-25T00:06:01Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createExcelHash -->
-        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@1ca265]" name="testExecMethod" duration-ms="7683" started-at="2013-09-24T16:37:37Z" finished-at="2013-09-24T16:37:44Z">
+        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@1abbe6c]" name="testExecMethod" duration-ms="80853" started-at="2013-09-25T00:06:01Z" finished-at="2013-09-25T00:07:22Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[TC_004]]>
+                <![CDATA[TC_005]]>
               </value>
             </param>
           </params>
@@ -68,6 +23,6 @@
           </reporter-output>
         </test-method> <!-- testExecMethod -->
       </class> <!-- org.sample.ParameterTest -->
-    </test> <!-- TC_004 -->
+    </test> <!-- TC_005 -->
   </suite> <!-- Suite -->
 </testng-results>

@@ -67,7 +67,8 @@ public class SeleniumUtilities {
 		}
 	}
 
-	@DSL(commName = "Click",commRegex = {"[a-zA-z]{1,}","[a-zA-z0-9-]{1,}"}, commSyntax = "Click element with {0} = {1}")
+	
+	@DSL(commName = "Click",commRegex = {"[a-zA-z]{1,}",".*"}, commSyntax = "Click element with {0} = {1}")
 	public void click(String attribute,String value) {
 		WebElement element=null;
 		switch(attribute){
@@ -111,6 +112,7 @@ public class SeleniumUtilities {
 		System.out.println("&&&&&&&&&&act"+objectActual.toString());
 		System.out.println("&&&&&&&&&&exp"+objectExpected.toString());
 		Assert.assertEquals(objectActual.toString(),objectExpected.toString());
+		System.out.println("*********************After Assert********************");
 	}
 	
 	@DSL(commName = "GetPageTitle",commRegex = {}, commSyntax = "GetPageTitle")
@@ -119,6 +121,11 @@ public class SeleniumUtilities {
 		return pageTitle.trim();
 	}
 	
+	@DSL(commName = "MaximizeBrowserWindow",commRegex = {}, commSyntax = "MaximizeBrowserWindow")
+	public void maximizeBrowserWindow(){
+		driver.manage().window().maximize();
+	}
+			
 	@DSL(commName = "Sleep",commRegex = {"[0-9]{1,}"}, commSyntax = "Sleep {0}")
 	public void sleep(int timeInSeconds) throws InterruptedException{
 		Thread.sleep(1000*timeInSeconds);
