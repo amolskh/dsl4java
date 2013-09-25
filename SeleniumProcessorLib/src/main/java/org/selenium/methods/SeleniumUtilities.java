@@ -66,7 +66,6 @@ public class SeleniumUtilities {
 			element.sendKeys(text);
 		}
 	}
-
 	
 	@DSL(commName = "Click",commRegex = {"[a-zA-z]{1,}",".*"}, commSyntax = "Click element with {0} = {1}")
 	public void click(String attribute,String value) {
@@ -109,10 +108,10 @@ public class SeleniumUtilities {
 		Object objectActual = (Object)InitDSL.runTimeVars.get(obj.toString());		
 		Object objectExpected = (Object)objectExp;
 		
-		System.out.println("&&&&&&&&&&act"+objectActual.toString());
-		System.out.println("&&&&&&&&&&exp"+objectExpected.toString());
-		Assert.assertEquals(objectActual.toString(),objectExpected.toString());
-		System.out.println("*********************After Assert********************");
+		System.out.println("Actual Value = "+objectActual.toString());
+		System.out.println("Expected Value = "+objectExpected.toString());
+		
+		Assert.assertEquals(objectActual.toString(),objectExpected.toString());		
 	}
 	
 	@DSL(commName = "GetPageTitle",commRegex = {}, commSyntax = "GetPageTitle")

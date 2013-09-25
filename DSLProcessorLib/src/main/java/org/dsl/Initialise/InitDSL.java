@@ -2,11 +2,14 @@ package org.dsl.Initialise;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.Set;
 
 import org.dsl.annotation.DSL;
 import org.dsl.bean.DSLObject;
+import org.dsl.exception.DSLExecFailException;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -33,7 +37,7 @@ public class InitDSL
 	public static Map methodCommandMapping = new HashMap();
 	public static Properties prop;
 
-	public static void initialise(String testCase)
+	public static void initialise(String testCase) throws DSLExecFailException
 	{
 		try
 		{
@@ -68,27 +72,27 @@ public class InitDSL
 				methodCommandMapping.put(commandSyntax, dslObj);
 			}
 		}
-			readFile(testCase);		
+		readFile(testCase);		
 
-			for (int j=0; j < dslCommands.size(); j++) {
-				Iterator it = methodCommandMapping.entrySet().iterator();
-				while (it.hasNext()) {
-					Map.Entry pairs = (Map.Entry)it.next();
+		for (int j=0; j < dslCommands.size(); j++) {
+			Iterator it = methodCommandMapping.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry pairs = (Map.Entry)it.next();
 
-					if (((String)dslCommands.get(j)).matches((String)pairs.getKey())) {
-						DSLObject obj = (DSLObject)pairs.getValue();
-						Object result = invokeMethod(obj,(String)dslCommands.get(j));
-						if ((result == null) || (j >= dslCommands.size() - 1))
-							break;
-						if (!((String)dslCommands.get(j + 1)).startsWith("Assign"))
-							break;
-						String varName = ((String)dslCommands.get(j + 1)).replaceAll("Assign ", "");
-						runTimeVars.put(varName, result);
-						j++;
+				if (((String)dslCommands.get(j)).matches((String)pairs.getKey())) {
+					DSLObject obj = (DSLObject)pairs.getValue();
+					Object result = invokeMethod(obj,(String)dslCommands.get(j));
+					if ((result == null) || (j >= dslCommands.size() - 1))
 						break;
-					}
+					if (!((String)dslCommands.get(j + 1)).startsWith("Assign"))
+						break;
+					String varName = ((String)dslCommands.get(j + 1)).replaceAll("Assign ", "");
+					runTimeVars.put(varName, result);
+					j++;
+					break;
 				}
-			}		
+			}
+		}		
 	}
 
 	private static void getConfig() throws IOException {
@@ -98,7 +102,7 @@ public class InitDSL
 	}
 
 	/*public static void readFile(String test) {
-		
+
 		System.out.println("^^^^^^^^^^^^^^^^"+test);
 		try {
 			//InputStream finStream = InitDSL.class.getClassLoader().getResourceAsStream("demo.dsl"); 
@@ -126,7 +130,7 @@ public class InitDSL
 			e.printStackTrace();
 		}    
 	}*/
-	
+
 	public static void readFile(String testCase) {	
 		dslCommands.clear();
 		String testSteps[] = testCase.split("\n");
@@ -147,7 +151,7 @@ public class InitDSL
 		}		
 	}
 
-/*	public static Object invokeMethod(DSLObject dslObj, String command) {
+	/*	public static Object invokeMethod(DSLObject dslObj, String command) {
 		Method m = dslObj.getM();
 		String oCommand = command;
 		String commandName = dslObj.getCommandName();
@@ -157,7 +161,7 @@ public class InitDSL
 		Object[] input = new Object[commandRegex.length];
 		Object result = null;
 		int cnt = 0;
-		
+
 		Object[] orignalCommand;
 		Object[] userCommand;
 		if (command.matches(commandSyntax)) {
@@ -169,7 +173,7 @@ public class InitDSL
 					cnt++;
 				}
 			}
-		
+
 		if (command.matches(commandSyntax)) {
 			if(command.contains("VerifyEqual")){
 				userCommand = command.split(" VerifyEqual ");
@@ -222,12 +226,12 @@ public class InitDSL
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}*/
-	
-	
-	public static Object invokeMethod(DSLObject dslObj, String command) {
+
+
+	public static Object invokeMethod(DSLObject dslObj, String command) throws DSLExecFailException {
 		Method m = dslObj.getM();
 		String oCommand = command;
 		String commandName = dslObj.getCommandName();
@@ -239,10 +243,10 @@ public class InitDSL
 		int cnt = 0;
 		int i = 0;
 		int j=0;
-		
+
 		String[] orignalCommand = commandSyntax.split(" ");
 		String[] userCommand = command.split(" ");		
-		
+
 		while (i < orignalCommand.length) {
 			if (orignalCommand[i].equals(userCommand[cnt])) {
 				//System.out.println(orignalCommand[i] + " is neglected");
@@ -267,8 +271,8 @@ public class InitDSL
 					i++;
 				}
 				if(j< input.length){
-				input[j]=inpVal.trim();
-				j++;
+					input[j]=inpVal.trim();
+					j++;
 				}
 			} else {
 				System.out.println("No match");
@@ -276,44 +280,73 @@ public class InitDSL
 				cnt++;
 			}
 		}
-			
-			Class[] paramClass = m.getParameterTypes();
-			for (i = 0; i < paramClass.length; i++) {
-				String classCastType = null;
-				if ("int".equals(paramClass[i].getName())) {
-					classCastType = "java.lang.Integer";
-					input[i] = Integer.valueOf(Integer.parseInt((String)input[i]));
-				} else {
-					classCastType = paramClass[i].getName();
-					try
-					{
-						Class classCast = Class.forName(classCastType);
-						input[i] = classCast.cast(input[i]);						
-					}
-					catch (ClassNotFoundException e)
-					{
-						e.printStackTrace();
-					}
+
+		Class[] paramClass = m.getParameterTypes();
+		for (i = 0; i < paramClass.length; i++) {
+			String classCastType = null;
+			if ("int".equals(paramClass[i].getName())) {
+				classCastType = "java.lang.Integer";
+				input[i] = Integer.valueOf(Integer.parseInt((String)input[i]));
+			} else {
+				classCastType = paramClass[i].getName();
+				try
+				{
+					Class classCast = Class.forName(classCastType);
+					input[i] = classCast.cast(input[i]);						
+				}
+				catch (ClassNotFoundException e)
+				{
+					e.printStackTrace();
 				}
 			}
-			try {
-				m.setAccessible(true);
-				Object calc = m.getDeclaringClass().newInstance();
-				result = m.invoke(calc, input);
+		}
+		try {
+			m.setAccessible(true);
+			Object calc = m.getDeclaringClass().newInstance();
+			result = m.invoke(calc, input);
+		}
+		catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}		
+		catch (InvocationTargetException e) {
+			e.printStackTrace();
+			
+			List<String> exceptionList = new ArrayList<String>();
+
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw, true);
+			e.printStackTrace(pw);
+			String stackTrace = sw.getBuffer().toString();
+
+			String exceptionArray[]= stackTrace.split("\n");
+			for (int k=0;k<exceptionArray.length;k++){
+				if (exceptionArray[k].contains("java.lang.AssertionError")){
+					while(k<exceptionArray.length){
+						exceptionList.add(exceptionArray[k]);
+						k++;
+					}
+					break;
+				}
+
 			}
-			catch (IllegalArgumentException e) {
-				e.printStackTrace();
+
+			String errorString = "";
+
+			for (String s : exceptionList)
+			{
+				errorString += s + "\n";
+			}			
+
+			if (stackTrace.contains("java.lang.AssertionError")) {
+				throw new DSLExecFailException(errorString); 				  			   
 			}
-			catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			catch (InstantiationException e) {
-				e.printStackTrace();
-			}
-			catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}	
-		
+		}			
 		return result;
 	}
 }
