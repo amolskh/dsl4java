@@ -11,14 +11,20 @@ public class DriverInstance {
 
 	private static DriverInstance driverInstance;
 	private DriverInstance() {}
+	
+	public static void setDriverInstance(Object obj){
+		driverInstance=(DriverInstance)obj;
+	}
 
 	public static WebDriver getDriverInstance() {
 		if (driverInstance == null) {
+			System.out.println("*******************************************Entered Null");
 			synchronized (DriverInstance.class) {
 				if (driverInstance == null ) {
 					driverInstance = new DriverInstance();
 					browser = new FirefoxDriver();
 					browser.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+					browser.manage().window().maximize();
 				}
 			}
 		}

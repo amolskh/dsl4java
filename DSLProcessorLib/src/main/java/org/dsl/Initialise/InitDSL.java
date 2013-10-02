@@ -326,7 +326,7 @@ public class InitDSL
 
 			String exceptionArray[]= stackTrace.split("\n");
 			for (int k=0;k<exceptionArray.length;k++){
-				if (exceptionArray[k].contains("java.lang.AssertionError")){
+				if (exceptionArray[k].contains("Caused by")){
 					while(k<exceptionArray.length){
 						exceptionList.add(exceptionArray[k]);
 						k++;
@@ -343,7 +343,7 @@ public class InitDSL
 				errorString += s + "\n";
 			}			
 
-			if (stackTrace.contains("java.lang.AssertionError")) {
+			if (stackTrace.contains("Caused by")) {
 				throw new DSLExecFailException(errorString); 				  			   
 			}
 		}			

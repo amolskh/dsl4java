@@ -48,12 +48,12 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Suite">
-                    <span>testSuite.xml</span>
+                    <span>D:\DSL_Git_Repo\dsl4java\SampleProject\src\test\java\testSuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="testlist-Suite">
-                    <span class="test-stats">1 test</span>
+                    <span class="test-stats">3 tests</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -102,6 +102,16 @@
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.sample.ParameterTest" hash-for-method="testExecMethod(TC_001)">testExecMethod(TC_001)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.sample.ParameterTest" hash-for-method="testExecMethod(TC_002)">testExecMethod(TC_002)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="org.sample.ParameterTest" hash-for-method="testExecMethod(TC_003)">testExecMethod(TC_003)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -130,12 +140,28 @@
                   <span class="parameters">(TC_001)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExecMethod(TC_002)">
+                  </a> <!-- testExecMethod(TC_002) -->
+                  <span class="method-name">testExecMethod</span>
+                  <span class="parameters">(TC_002)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExecMethod(TC_003)">
+                  </a> <!-- testExecMethod(TC_003) -->
+                  <span class="method-name">testExecMethod</span>
+                  <span class="parameters">(TC_003)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-Suite-class-passed -->
         </div> <!-- panel Suite -->
         <div panel-name="test-xml-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/home/deepika/PersonalSoftware/gitRepo/dsl4java/SampleProject/src/test/java/testSuite.xml</span>
+            <span class="header-content">D:\DSL_Git_Repo\dsl4java\SampleProject\src\test\java\testSuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -148,6 +174,18 @@
       &lt;class name=&quot;org.sample.ParameterTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- TC_001 --&gt;
+  &lt;test name=&quot;TC_002&quot;&gt;
+    &lt;parameter name=&quot;tc_Name&quot; value=&quot;TC_002&quot;/&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.sample.ParameterTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- TC_002 --&gt;
+  &lt;test name=&quot;TC_003&quot;&gt;
+    &lt;parameter name=&quot;tc_Name&quot; value=&quot;TC_003&quot;/&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.sample.ParameterTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- TC_003 --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -160,6 +198,12 @@
             <ul>
               <li>
                 <span class="test-name">TC_001 (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">TC_002 (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">TC_003 (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -185,16 +229,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testExecMethod')
 data.setCell(0, 2, 'org.sample.ParameterTest')
-data.setCell(0, 3, 6497);
+data.setCell(0, 3, 12602);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testExecMethod')
+data.setCell(1, 2, 'org.sample.ParameterTest')
+data.setCell(1, 3, 6373);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testExecMethod')
+data.setCell(2, 2, 'org.sample.ParameterTest')
+data.setCell(2, 3, 3399);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 seconds</span>
+              <span class="suite-total-time">Total running time: 22 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -227,7 +279,15 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="test-method">
                 <span class="method-name">testExecMethod(TC_001)</span>
-                <span class="method-start">1460 ms</span>
+                <span class="method-start">844 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testExecMethod(TC_002)</span>
+                <span class="method-start">7312 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testExecMethod(TC_003)</span>
+                <span class="method-start">10761 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

@@ -13,17 +13,17 @@ public class SeleniumUtilities {
 	static WebDriver driver=DriverInstance.getDriverInstance();
 	WebDriverWait wait = new WebDriverWait(driver,20); 
 		
-	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "LoadUrl {0}")
+	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "Load Url {0}")
 	public void loadUrl(String url) {
 		driver.get(url);		
 	}
 
-	@DSL(commName = "CloseBrowser", commRegex = {}, commSyntax = "CloseBrowser")
+	@DSL(commName = "CloseBrowser", commRegex = {}, commSyntax = "Close Browser")
 	public void close() {
 		driver.close();		
 	}
 
-	@DSL(commName = "QuitBrowser", commRegex = {}, commSyntax = "QuitBrowser")
+	@DSL(commName = "QuitBrowser", commRegex = {}, commSyntax = "Quit Browser")
 	public void quit() {
 		driver.quit();	
 	}
@@ -114,13 +114,13 @@ public class SeleniumUtilities {
 		Assert.assertEquals(objectActual.toString(),objectExpected.toString());		
 	}
 	
-	@DSL(commName = "GetPageTitle",commRegex = {}, commSyntax = "GetPageTitle")
+	@DSL(commName = "GetPageTitle",commRegex = {}, commSyntax = "Get Page Title")
 	public String getPageTitle(){
 		String pageTitle = driver.getTitle();
 		return pageTitle.trim();
 	}
 	
-	@DSL(commName = "MaximizeBrowserWindow",commRegex = {}, commSyntax = "MaximizeBrowserWindow")
+	@DSL(commName = "MaximizeBrowserWindow",commRegex = {}, commSyntax = "Maximize Browser Window")
 	public void maximizeBrowserWindow(){
 		driver.manage().window().maximize();
 	}
@@ -128,6 +128,13 @@ public class SeleniumUtilities {
 	@DSL(commName = "Sleep",commRegex = {"[0-9]{1,}"}, commSyntax = "Sleep {0}")
 	public void sleep(int timeInSeconds) throws InterruptedException{
 		Thread.sleep(1000*timeInSeconds);
+	}	
+	
+	@DSL(commName = "InvokeBrowser",commRegex = {}, commSyntax = "Invoke Browser")
+	public void invokeBrowser(){
+		DriverInstance.setDriverInstance(null);
+		WebDriver driverInstance=DriverInstance.getDriverInstance();
+		driver=driverInstance;		
 	}
 	
 	
