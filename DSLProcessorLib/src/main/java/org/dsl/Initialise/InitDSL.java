@@ -101,36 +101,7 @@ public class InitDSL
 		prop.load(in);
 	}
 
-	/*public static void readFile(String test) {
-
-		System.out.println("^^^^^^^^^^^^^^^^"+test);
-		try {
-			//InputStream finStream = InitDSL.class.getClassLoader().getResourceAsStream("demo.dsl"); 
-			InputStream finStream = InitDSL.class.getClassLoader().getResourceAsStream(test);
-			DataInputStream dinStream = new DataInputStream(finStream);
-			BufferedReader buReader = new BufferedReader(new InputStreamReader(
-					dinStream));
-			String strLine;
-			while ((strLine = buReader.readLine()) != null)
-			{
-				//String strLine;dslClass
-				if (strLine.contains("Assign")) {
-					String[] cmd = strLine.split(" Assign ");
-					dslCommands.add(cmd[0]);
-					dslCommands.add("Assign " + cmd[1]);
-
-				} else {
-					dslCommands.add(strLine);
-				}
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}    
-	}*/
-
+	
 	public static void readFile(String testCase) {	
 		dslCommands.clear();
 		String testSteps[] = testCase.split("\n");
@@ -151,87 +122,7 @@ public class InitDSL
 		}		
 	}
 
-	/*	public static Object invokeMethod(DSLObject dslObj, String command) {
-		Method m = dslObj.getM();
-		String oCommand = command;
-		String commandName = dslObj.getCommandName();
-		String commandSyntax = dslObj.getCommandSyntax();
-		String[] commandRegex = dslObj.getCommandRegex();
-		commandSyntax = MessageFormat.format(commandSyntax, commandRegex);
-		Object[] input = new Object[commandRegex.length];
-		Object result = null;
-		int cnt = 0;
-
-		Object[] orignalCommand;
-		Object[] userCommand;
-		if (command.matches(commandSyntax)) {
-			Object[] orignalCommand = commandSyntax.split(" ");
-			Object[] userCommand = command.split(" ");
-			for (int i = 0; i < orignalCommand.length; i++) {
-				if (!orignalCommand[i].equals(userCommand[i])) {
-					input[cnt] = userCommand[i];
-					cnt++;
-				}
-			}
-
-		if (command.matches(commandSyntax)) {
-			if(command.contains("VerifyEqual")){
-				userCommand = command.split(" VerifyEqual ");
-				orignalCommand = commandSyntax.split(" VerifyEqual ");				
-			}			
-			else{			
-				orignalCommand = commandSyntax.split(" ");
-				userCommand = command.split(" ");
-			}
-			for (int i = 0; i < orignalCommand.length; i++) {
-				if (!orignalCommand[i].equals(userCommand[i])) {
-					input[cnt] = userCommand[i];
-					cnt++;
-				}
-			}
-			Class[] paramClass = m.getParameterTypes();
-			for (int i = 0; i < paramClass.length; i++) {
-				String classCastType = null;
-				if ("int".equals(paramClass[i].getName())) {
-					classCastType = "java.lang.Integer";
-					input[i] = Integer.valueOf(Integer.parseInt((String)input[i]));
-				} else {
-					classCastType = paramClass[i].getName();
-					try
-					{
-						Class classCast = Class.forName(classCastType);
-						input[i] = classCast.cast(input[i]);
-					}
-					catch (ClassNotFoundException e)
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-			try {
-				m.setAccessible(true);
-				Object calc = m.getDeclaringClass().newInstance();
-				result = m.invoke(calc, input);
-			}
-			catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			}
-			catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			catch (InstantiationException e) {
-				e.printStackTrace();
-			}
-			catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return result;
-	}*/
-
-
-	public static Object invokeMethod(DSLObject dslObj, String command) throws DSLExecFailException {
+		public static Object invokeMethod(DSLObject dslObj, String command) throws DSLExecFailException {
 		Method m = dslObj.getM();
 		String oCommand = command;
 		String commandName = dslObj.getCommandName();

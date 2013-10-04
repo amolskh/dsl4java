@@ -1,98 +1,68 @@
 package org.sample;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.dsl.Initialise.InitDSL;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
 
 public class test {
 
-	/**
-	 * @param args
-	 * @throws InterruptedException 
-	 */
+	
 	/*public static void main(String[] args) throws InterruptedException {
 		 WebDriver driver = new FirefoxDriver();
+		 driver.manage().window().maximize();
 		 driver.get("http://127.0.0.1/wordpress/wp-admin/");
 		 driver.findElement(By.id("user_login")).sendKeys("admin");
 		 Thread.sleep(2000);
 		 driver.findElement(By.id("user_pass")).sendKeys("test");
-		 driver.findElement(By.id("wp-submit")).click();	 
+		 System.out.println(driver.findElement(By.id("wp-submit")).getAttribute("test"));
+		 System.out.println(driver.findElement(By.id("wp-submit")).isDisplayed());
+         System.out.println(driver.findElement(By.id("rememberme")).isEnabled());
+         System.out.println(driver.findElement(By.id("rememberme")).isSelected());
+         driver.findElement(By.id("rememberme")).click();
+         System.out.println(driver.findElement(By.id("rememberme")).isSelected());
+		 driver.findElement(By.id("wp-submit")).click();		 
+		 driver.findElement(By.id("title")).sendKeys("testPost_Title");
+		 driver.findElement(By.id("content")).sendKeys("testPost_Content");
+		 driver.findElement(By.id("publish")).click();
+		 
+		 
+		 
+		 driver.findElement(By.xpath("//li[@id='menu-posts']/a/div[3]")).click();		 
+		 Select select = new Select(driver.findElement(By.xpath("//form[@id='posts-filter']/div[1]/div[1]/select")));		 
+		 select.selectByVisibleText("Edit");
+		 
+		 driver.quit();
 
 	}*/
-
-/*	public static void main(String[] args) throws InterruptedException {
-		//String title = "Dashboard ‹ test — WordPress";
-		//String command = "VerifyEqual " + title + " with Dashboard ‹ test — WordPress";
-		// System.out.println(command);
-		//String commandSyntax = "Print {0}";
-
-		String command = "Print " +" with Dashboard ‹ test — WordPress";
-		// System.out.println(command);
-		//String commandSyntax = "VerifyEqual {0} with {1}";
-		String commandSyntax = "Print {0}";
-		String[] commandArr = commandSyntax.split(" ");
-		String[] userCommandArr = command.split(" ");
-		int i = 0, cnt = 0;
-		while (i < commandArr.length) {
-			if (commandArr[i].equals(userCommandArr[cnt])) {
-				System.out.println(commandArr[i] + " is neglected");
-				i++;
-				cnt++;
-			} else if (commandArr[i].matches("\\{[0-9]{1,2}\\}")) {
-				System.out.println("Regex");
-				String inpVal = "";
-				if ((i + 1) < commandArr.length) {
-					i = i + 1;
-					String hold = commandArr[i];
-
-					while (i < commandArr.length
-							&& !hold.equals(userCommandArr[cnt])) {
-						inpVal = inpVal + userCommandArr[cnt];
-						cnt++;
-					}
-				} else {
-					while (cnt < userCommandArr.length) {
-						inpVal = inpVal + userCommandArr[cnt];
-						cnt++;
-					}
-					i++;
-				}
-				System.out.println(inpVal);
-			} else {
-				System.out.println("No match");
-				i++;
-				cnt++;
-			}
+	
+	static Properties prop=null;
+	
+	public static void main(String[] args) throws InterruptedException {
+		try
+		{
+			getConfig();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 
+		String packageList = prop.getProperty("browser");
+		System.out.println(packageList);
+
+		 
+    	
 	}
-*/
-
-	public static void main(String[] args) throws InterruptedException {
-		/*int i=2;
-		System.out.println(Integer.toString(i));
-		Object objInt = (Object)i;
-		System.out.println(objInt);*/
-		
-		/*float i=2.5f;
-		Object objInt = (Object)i;
-		System.out.println(objInt);
-*/
-		
-		
-		boolean i=false;
-		Object objInt = (Object)i;
-		System.out.println(objInt.getClass().getName());
-
-		String test = "false";
-		Object objStr = (Object)test;
-		System.out.println(objStr.getClass().getName());
-		
-		Assert.assertEquals(objInt.toString(), objStr.toString());
-		
+	
+	private static void getConfig() throws IOException {
+		prop = new Properties();
+		InputStream in = InitDSL.class.getClassLoader().getResourceAsStream("config.properties");
+		prop.load(in);
 	}
-
-
 
 }
