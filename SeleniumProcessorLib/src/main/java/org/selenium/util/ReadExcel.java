@@ -72,20 +72,6 @@ public class ReadExcel {
 							break;
 						}
 						value = cell.getRichStringCellValue().getString();	
-						List<String> testSteps = new ArrayList<String>();
-						String arr[]=value.split("\\n");
-						for(int i=0;i<arr.length;i++){
-							if(!arr[i].startsWith("#")){
-								testSteps.add(arr[i]);
-							}							
-						}
-						StringBuilder sb = new StringBuilder();
-						for (String s : testSteps)
-						{
-							sb.append(s);
-							sb.append("\n");
-						}
-						value=sb.toString();
 						testcaseMapping.put(key, value);	
 					}
 					break;

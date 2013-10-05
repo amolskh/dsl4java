@@ -16,23 +16,18 @@ public class test {
 
 	
 	public static void main(String[] args) throws InterruptedException {
-		 //WebDriver driver = new FirefoxDriver();
-		
-		 File file = new File("src/main/resources/chromedriver.exe");
-		 System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-		 WebDriver driver = new ChromeDriver();
+		 WebDriver driver = new FirefoxDriver();		 
 		 driver.manage().window().maximize();
 		 driver.get("http://127.0.0.1/wordpress/wp-admin/");
 		 driver.findElement(By.id("user_login")).sendKeys("admin");
 		 Thread.sleep(2000);
 		 driver.findElement(By.id("user_pass")).sendKeys("test");
-		 driver.findElement(By.id("wp-submit")).click();		 
-		 driver.findElement(By.id("title")).sendKeys("testPost_Title");
-		 driver.findElement(By.id("content")).sendKeys("testPost_Content");
-		 driver.findElement(By.id("publish")).click();
-		 Thread.sleep(6000);
-		 System.out.println(driver.findElement(By.linkText("View post")).isDisplayed());
-		 System.out.println(driver.findElement(By.linkText("Edit post")).isDisplayed());
+		 driver.findElement(By.id("wp-submit")).click();
+		  System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());
+		 if(!driver.findElement(By.id("adv-settings")).isDisplayed()){
+				driver.findElement(By.id("show-settings-link")).click();
+		 }
+	     System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());
 		 
 		 
 		 

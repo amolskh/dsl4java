@@ -49,7 +49,7 @@ public class SeleniumUtilities {
 
 	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "Load {0}")
 	public void loadUrl(String url) {
-	    driver.get(InitDSL.runTimeVars.get(url).toString());			
+		driver.get(InitDSL.getVariableValue(url).toString());			
 	}
 
 	@DSL(commName = "CloseBrowser", commRegex = {}, commSyntax = "Close browser")
@@ -82,7 +82,7 @@ public class SeleniumUtilities {
 
 	@DSL(commName = "VerifyEqual",commRegex = {".*",".*"}, commSyntax = "{0} VerifyEqual {1}")
 	public void verifyEqual(Object obj, Object objectExp) throws DSLExecFailException{
-		Object objectActual = (Object)InitDSL.runTimeVars.get(obj.toString());		
+		Object objectActual =InitDSL.getVariableValue(obj.toString());
 		Object objectExpected = (Object)objectExp;
 
 		System.out.println("Actual Value = "+objectActual.toString());
@@ -214,6 +214,4 @@ public class SeleniumUtilities {
 		}
 		return parentWindowHandle;
 	}
-
-
 }

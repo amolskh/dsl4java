@@ -33,6 +33,7 @@ public class InitDSL
 	static Class<?> dslClass = null;
 	static List<String> dslCommands = new ArrayList<String>();
 	public static Map runTimeVars = new HashMap();
+	public static Map globalRunTimeVars = new HashMap();
 	public static Map methodCommandMapping = new HashMap();
 	public static Properties propConfig;
 	public static Properties propGlobalConfig;
@@ -46,7 +47,7 @@ public class InitDSL
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-				
+
 		String packageList = propConfig.getProperty("packageName");
 		String[] pack= packageList.split("\\|");
 		for(int i=0;i<pack.length;i++){
@@ -72,13 +73,16 @@ public class InitDSL
 				methodCommandMapping.put(commandSyntax, dslObj);
 			}
 		}
-		readFile(testCase);		
-
+		readFile(testCase);	
+		runTimeVars.clear();
 		for (int j=0; j < dslCommands.size(); j++) {
+			if (((String)dslCommands.get(j)).matches("If (.*)")){
+				System.out.println("**********Entered If");
+			}
 			Iterator it = methodCommandMapping.entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry pairs = (Map.Entry)it.next();
-
+			
 				if (((String)dslCommands.get(j)).matches((String)pairs.getKey())) {
 					DSLObject obj = (DSLObject)pairs.getValue();
 					Object result = invokeMethod(obj,(String)dslCommands.get(j));
@@ -101,7 +105,7 @@ public class InitDSL
 		prop.load(in);
 		return prop;
 	}
-	
+
 	public static void readFile(String testCase) {	
 		dslCommands.clear();
 		String testSteps[] = testCase.split("\n");
@@ -111,6 +115,12 @@ public class InitDSL
 		{	
 			strLine=testSteps[i];
 
+			if(strLine.startsWith("#")){
+				continue;
+			}
+			if(strLine.equals("Exit")){
+				break;
+			}
 			if (strLine.contains("Assign")) {
 				String[] cmd = strLine.split(" Assign ");
 				dslCommands.add(cmd[0]);
@@ -119,7 +129,7 @@ public class InitDSL
 			} else {
 				dslCommands.add(strLine);
 			}
-		}		
+		}
 	}
 
 	public static Object invokeMethod(DSLObject dslObj, String command) throws DSLExecFailException {
@@ -207,7 +217,7 @@ public class InitDSL
 		}		
 		catch (InvocationTargetException e) {
 			e.printStackTrace();
-			
+
 			List<String> exceptionList = new ArrayList<String>();
 
 			StringWriter sw = new StringWriter();
@@ -242,7 +252,7 @@ public class InitDSL
 	}
 
 	public static void createGlobalHash(){
-		
+
 		try
 		{
 			propGlobalConfig=getConfig("GlobalConfig.properties");
@@ -250,7 +260,16 @@ public class InitDSL
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		runTimeVars.put("browser", propGlobalConfig.getProperty("browser"));
-		runTimeVars.put("testUrl", propGlobalConfig.getProperty("testUrl"));	
+		globalRunTimeVars.put("browser", propGlobalConfig.getProperty("browser"));
+		globalRunTimeVars.put("testUrl", propGlobalConfig.getProperty("testUrl"));	
 	}
+
+	public static Object getVariableValue(String varName){
+		Object obj=InitDSL.runTimeVars.get(varName);
+		if(obj==null){
+			obj=InitDSL.globalRunTimeVars.get(varName);
+		}
+		return obj;
+	}
+
 }
