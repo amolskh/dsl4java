@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,19 +34,20 @@ public class InitDSL
 	static List<String> dslCommands = new ArrayList<String>();
 	public static Map runTimeVars = new HashMap();
 	public static Map methodCommandMapping = new HashMap();
-	public static Properties prop;
+	public static Properties propConfig;
+	public static Properties propGlobalConfig;
 
 	public static void initialise(String testCase) throws DSLExecFailException
 	{
 		try
 		{
-			getConfig();
+			propConfig=getConfig("dsl.properties");
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		String packageList = prop.getProperty("packageName");
+				
+		String packageList = propConfig.getProperty("packageName");
 		String[] pack= packageList.split("\\|");
 		for(int i=0;i<pack.length;i++){
 			Reflections reflections = new Reflections(new ConfigurationBuilder().filterInputsBy(new FilterBuilder().includePackage(pack[i]))
@@ -95,12 +95,12 @@ public class InitDSL
 		}		
 	}
 
-	private static void getConfig() throws IOException {
-		prop = new Properties();
-		InputStream in = InitDSL.class.getClassLoader().getResourceAsStream("dsl.properties");
+	private static Properties getConfig(String propFileName) throws IOException {
+		Properties prop = new Properties();
+		InputStream in = InitDSL.class.getClassLoader().getResourceAsStream(propFileName);
 		prop.load(in);
+		return prop;
 	}
-
 	
 	public static void readFile(String testCase) {	
 		dslCommands.clear();
@@ -122,7 +122,7 @@ public class InitDSL
 		}		
 	}
 
-		public static Object invokeMethod(DSLObject dslObj, String command) throws DSLExecFailException {
+	public static Object invokeMethod(DSLObject dslObj, String command) throws DSLExecFailException {
 		Method m = dslObj.getM();
 		String oCommand = command;
 		String commandName = dslObj.getCommandName();
@@ -239,5 +239,18 @@ public class InitDSL
 			}
 		}			
 		return result;
+	}
+
+	public static void createGlobalHash(){
+		
+		try
+		{
+			propGlobalConfig=getConfig("GlobalConfig.properties");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		runTimeVars.put("browser", propGlobalConfig.getProperty("browser"));
+		runTimeVars.put("testUrl", propGlobalConfig.getProperty("testUrl"));	
 	}
 }

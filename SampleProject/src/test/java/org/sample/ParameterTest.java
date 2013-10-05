@@ -13,12 +13,13 @@ public class ParameterTest {
 	
 	@BeforeSuite()
 	public void createExcelHash() throws IOException{
-		ReadExcel.ReadTestcaseExcel("src/main/resources/Testcases.xlsx");		
+		ReadExcel.ReadTestcaseExcel("src/main/resources/Testcases.xlsx");	
+		InitDSL.createGlobalHash();
 	}
 
 	@Test
 	@Parameters(value="tc_Name")	
 	public void testExecMethod(String tc_Name) throws IOException, DSLExecFailException{
-		InitDSL.initialise(ReadExcel.testcaseMapping.get(tc_Name));	
+		InitDSL.initialise(ReadExcel.testcaseMapping.get(tc_Name));		
 	}
 }

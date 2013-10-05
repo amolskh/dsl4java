@@ -1,8 +1,6 @@
 package org.selenium.methods;
 
-import java.util.Iterator;
 import java.util.Set;
-
 import org.dsl.Initialise.InitDSL;
 import org.dsl.annotation.DSL;
 import org.dsl.exception.DSLExecFailException;
@@ -14,10 +12,8 @@ import org.selenium.driver.DriverInstance;
 import org.testng.Assert;
 
 public class SeleniumUtilities {
-	//static Logger log = Logger.getLogger(SeleniumUtilities.class.getName());
 	static WebDriver driver=null;
-	//WebDriverWait wait = new WebDriverWait(driver,20); 
-
+	
 	public WebElement getElement(String attribute,String value){
 		WebElement element=null;
 		switch(attribute){
@@ -51,9 +47,9 @@ public class SeleniumUtilities {
 		return element;
 	}
 
-	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "Load url {0}")
+	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "Load {0}")
 	public void loadUrl(String url) {
-		driver.get(url);		
+	    driver.get(InitDSL.runTimeVars.get(url).toString());			
 	}
 
 	@DSL(commName = "CloseBrowser", commRegex = {}, commSyntax = "Close browser")

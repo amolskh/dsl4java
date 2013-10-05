@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
@@ -22,8 +23,8 @@ public class ReadExcel {
 
 	public static void  ReadTestcaseExcel(String filePath) throws IOException {
 		CreateTestNGxml nt = new CreateTestNGxml();		
-        File file = new File(filePath);
-        InputStream inp = new FileInputStream(file.getAbsolutePath());
+		File file = new File(filePath);
+		InputStream inp = new FileInputStream(file.getAbsolutePath());
 		String fileExtn = GetFileExtension(filePath);
 		Workbook wb_xssf; //Declare XSSF WorkBook
 		Workbook wb_hssf; //Declare HSSF WorkBook
@@ -49,8 +50,9 @@ public class ReadExcel {
 			Row row = (Row) rows.next();
 			Iterator<Cell> cells = row.cellIterator();
 
-			String key = null;
+			String key=null;
 			String value=null;
+			String status="Disabled";
 
 			while (cells.hasNext())
 			{
@@ -59,13 +61,33 @@ public class ReadExcel {
 				switch ( cell.getCellType() ) 
 				{
 				case Cell.CELL_TYPE_STRING:
-					if(cell.getColumnIndex()==0){
-						nt.createTestList(cell.getRichStringCellValue().getString());
-						key=cell.getRichStringCellValue().getString();
+					if(cell.getColumnIndex()==0 && cell.getRichStringCellValue().getString().equals("Enabled")){
+						status="Enabled";
 						break;
 					}
-					value = cell.getRichStringCellValue().getString();		
-					testcaseMapping.put(key, value);					
+					if(status.equals("Enabled")){
+						if(cell.getColumnIndex()==1){
+							nt.createTestList(cell.getRichStringCellValue().getString());
+							key=cell.getRichStringCellValue().getString();
+							break;
+						}
+						value = cell.getRichStringCellValue().getString();	
+						List<String> testSteps = new ArrayList<String>();
+						String arr[]=value.split("\\n");
+						for(int i=0;i<arr.length;i++){
+							if(!arr[i].startsWith("#")){
+								testSteps.add(arr[i]);
+							}							
+						}
+						StringBuilder sb = new StringBuilder();
+						for (String s : testSteps)
+						{
+							sb.append(s);
+							sb.append("\n");
+						}
+						value=sb.toString();
+						testcaseMapping.put(key, value);	
+					}
 					break;
 				case Cell.CELL_TYPE_NUMERIC:
 					if(DateUtil.isCellDateFormatted(cell)) {
@@ -91,7 +113,7 @@ public class ReadExcel {
 	{
 		System.out.println(message);
 	}
-	
+
 	private static String GetFileExtension(String fname2)
 	{
 		String fileName = fname2;
