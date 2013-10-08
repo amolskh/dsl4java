@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.dsl.ControlLoops.IfControl;
 import org.dsl.annotation.DSL;
 import org.dsl.bean.DSLObject;
 import org.dsl.exception.DSLExecFailException;
@@ -75,14 +76,16 @@ public class InitDSL
 		}
 		readFile(testCase);	
 		runTimeVars.clear();
-		for (int j=0; j < dslCommands.size(); j++) {
-			if (((String)dslCommands.get(j)).matches("If (.*)")){
-				System.out.println("**********Entered If");
-			}
+		for (int j=0; j < dslCommands.size(); j++) {			
 			Iterator it = methodCommandMapping.entrySet().iterator();
+
+			if (((String)dslCommands.get(j)).matches("If (.*)")){
+				j=IfControl.perform(dslCommands,j);
+			}
+
 			while (it.hasNext()) {
 				Map.Entry pairs = (Map.Entry)it.next();
-			
+
 				if (((String)dslCommands.get(j)).matches((String)pairs.getKey())) {
 					DSLObject obj = (DSLObject)pairs.getValue();
 					Object result = invokeMethod(obj,(String)dslCommands.get(j));

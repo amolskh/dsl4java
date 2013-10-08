@@ -2,10 +2,10 @@
 <testng-results skipped="0" failed="0" total="0" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="org.selenium.AppTest" duration-ms="5" started-at="2013-10-05T14:27:47Z" finished-at="2013-10-05T14:27:47Z">
+  <suite name="org.selenium.AppTest" duration-ms="4" started-at="2013-10-08T02:04:06Z" finished-at="2013-10-08T02:04:06Z">
     <groups>
     </groups>
-    <test name="Command line test" duration-ms="5" started-at="2013-10-05T14:27:47Z" finished-at="2013-10-05T14:27:47Z">
+    <test name="Command line test" duration-ms="4" started-at="2013-10-08T02:04:06Z" finished-at="2013-10-08T02:04:06Z">
     </test> <!-- Command line test -->
   </suite> <!-- org.selenium.AppTest -->
 </testng-results>

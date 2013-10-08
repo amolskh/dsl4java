@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class test {
 
 	
-	public static void main(String[] args) throws InterruptedException {
+	/*public static void main(String[] args) throws InterruptedException {
 		 WebDriver driver = new FirefoxDriver();		 
 		 driver.manage().window().maximize();
 		 driver.get("http://127.0.0.1/wordpress/wp-admin/");
@@ -27,14 +27,19 @@ public class test {
 		 if(!driver.findElement(By.id("adv-settings")).isDisplayed()){
 				driver.findElement(By.id("show-settings-link")).click();
 		 }
-	     System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());
-		 
-		 
-		 
-		
-		 
+	     System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());		 
 		 driver.quit();
 
+	}*/
+	
+	
+	public static void main(String[] args){
+		String test="If ({SettingsSectionDisplayed})";
+		String arr[]= test.split(" ");
+		System.out.println(arr[1]);
+		test=arr[1].replaceAll("\\(\\{", "");
+		test=test.replaceAll("\\}\\)", "");
+		System.out.println(test);
 	}
 	
 	
