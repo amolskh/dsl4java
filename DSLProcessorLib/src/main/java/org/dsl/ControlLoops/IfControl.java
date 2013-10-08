@@ -4,15 +4,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.dsl.ControlLoops.ControlLoopType.LoopType;
 import org.dsl.Initialise.InitDSL;
 import org.dsl.bean.DSLObject;
 import org.dsl.exception.DSLExecFailException;
 
-public class IfControl{
+public class IfControl extends ControlLoops{
 
-	public static int perform(List<String> dslCommands,int j) throws DSLExecFailException{
+	IfControl() throws DSLExecFailException {
+		super(LoopType.IF);
+	}
+
+	@Override
+	public int perform(List<String> dslCommands,int j) throws DSLExecFailException{
 		int i=0;
-		
+
 		String var=dslCommands.get(j);
 		String arr[]= var.split(" ");
 		var=arr[1].replaceAll("\\(", "");

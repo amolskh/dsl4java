@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="11514" started-at="2013-10-06T16:04:06Z" finished-at="2013-10-06T16:04:17Z">
+  <suite name="Suite" duration-ms="21433" started-at="2013-10-08T07:30:15Z" finished-at="2013-10-08T07:30:37Z">
     <groups>
     </groups>
-    <test name="TC_004" duration-ms="11514" started-at="2013-10-06T16:04:06Z" finished-at="2013-10-06T16:04:17Z">
+    <test name="TC_004" duration-ms="21433" started-at="2013-10-08T07:30:15Z" finished-at="2013-10-08T07:30:37Z">
       <class name="org.sample.ParameterTest">
-        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@1fc894e]" name="createExcelHash" is-config="true" duration-ms="1440" started-at="2013-10-06T21:34:04Z" finished-at="2013-10-06T21:34:06Z">
+        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@1eb424b]" name="createExcelHash" is-config="true" duration-ms="800" started-at="2013-10-08T13:00:15Z" finished-at="2013-10-08T13:00:15Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createExcelHash -->
-        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@1fc894e]" name="testExecMethod" duration-ms="11481" started-at="2013-10-06T21:34:06Z" finished-at="2013-10-06T21:34:17Z">
+        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@1eb424b]" name="testExecMethod" duration-ms="21423" started-at="2013-10-08T13:00:16Z" finished-at="2013-10-08T13:00:37Z">
           <params>
             <param index="0">
               <value>

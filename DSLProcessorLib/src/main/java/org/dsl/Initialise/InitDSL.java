@@ -16,7 +16,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.dsl.ControlLoops.IfControl;
+import org.dsl.ControlLoops.ControlLoopsFactory;
+import org.dsl.ControlLoops.ControlLoopType.LoopType;
 import org.dsl.annotation.DSL;
 import org.dsl.bean.DSLObject;
 import org.dsl.exception.DSLExecFailException;
@@ -80,7 +81,7 @@ public class InitDSL
 			Iterator it = methodCommandMapping.entrySet().iterator();
 
 			if (((String)dslCommands.get(j)).matches("If (.*)")){
-				j=IfControl.perform(dslCommands,j);
+				j=ControlLoopsFactory.processControlLoop(LoopType.IF,dslCommands,j);				
 			}
 
 			while (it.hasNext()) {
