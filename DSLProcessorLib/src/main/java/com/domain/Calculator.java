@@ -21,10 +21,10 @@ public class Calculator {
 	}
 
 	@DSL(commName = "Print", commRegex = {".*"}, commSyntax = "Print {0}")
-	public void print(String obj) {
-		System.out.println(InitDSL.getVariableValue(obj));
+	public void print(String obj) {		
+		System.out.println(InitDSL.getVariableValue(obj));				
 	}	
-	
+
 	/*@DSL(commName = "Concat", commRegex = {"[a-zA-z0-9{}%]{1,}","[a-zA-z0-9{}%]{1,}"}, commSyntax = "Concat {0} and {1}")
 	public String concatString(String a, String b) {
 		System.out.println("****"+a.concat(b));

@@ -117,7 +117,7 @@ public class InitDSL
 
 		for(int i=0;i<testSteps.length;i++)
 		{	
-			strLine=testSteps[i];
+			strLine=testSteps[i].trim();
 
 			if(strLine.startsWith("#")){
 				continue;
@@ -264,8 +264,8 @@ public class InitDSL
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		globalRunTimeVars.put("browser", propGlobalConfig.getProperty("browser"));
-		globalRunTimeVars.put("testUrl", propGlobalConfig.getProperty("testUrl"));	
+		globalRunTimeVars.put("{browser}", propGlobalConfig.getProperty("browser"));
+		globalRunTimeVars.put("{testUrl}", propGlobalConfig.getProperty("testUrl"));	
 	}
 
 	public static Object getVariableValue(String varName){

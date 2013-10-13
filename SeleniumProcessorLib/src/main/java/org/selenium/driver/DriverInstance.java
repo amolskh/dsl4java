@@ -22,7 +22,7 @@ public class DriverInstance {
 	}
 
 	public static WebDriver getDriverInstance() {
-		String browserName = InitDSL.getVariableValue("browser").toString();
+		String browserName = InitDSL.getVariableValue("{browser}").toString();
 		System.out.println("Executing testcase on: "+browserName);
 
 		if (driverInstance == null) {

@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.dsl.Initialise.InitDSL;
 import org.openqa.selenium.By;
@@ -13,7 +17,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class test {
-
 	
 	/*public static void main(String[] args) throws InterruptedException {
 		 WebDriver driver = new FirefoxDriver();		 
@@ -29,20 +32,28 @@ public class test {
 		 }
 	     System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());		 
 		 driver.quit();
-
-	}*/
-	
+	}*/	
 	
 	public static void main(String[] args){
-		String test="If ({SettingsSectionDisplayed})";
-		String arr[]= test.split(" ");
-		System.out.println(arr[1]);
-		test=arr[1].replaceAll("\\(\\{", "");
-		test=test.replaceAll("\\}\\)", "");
-		System.out.println(test);
-	}
-	
-	
-	
+		String in="({SettingsSectionDisplayed} & {OpenSectionDisplayed})";
+		
+		
+		//String in = "({item1.test} & {item2.qa})";
 
+		Pattern p = Pattern.compile("\\{(.*?)\\}");
+		Matcher m = p.matcher(in);
+
+		while(m.find()) {
+			String temp=m.group(1);
+			String test ="InitDSL.getVariableValue({"+temp+"})";
+			in=in.replace("{"+temp+"}", test);
+		   // System.out.println(m.group(1));
+					
+		   // System.out.println(test);
+		}	
+		
+		System.out.println(in);
+		
+		
+	}
 }

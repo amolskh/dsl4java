@@ -11,12 +11,12 @@ public class ControlLoopsFactory {
 		ControlLoops controlLoop = null;
 		int k=0;
 		switch (loopType) {
-		case IF:
-			controlLoop = new IfControl();
-			 k=controlLoop.perform(dslCommands, j);
+		case IF: {			
+			controlLoop = new IfElseControl();
+			k=controlLoop.perform(dslCommands, j);
 			break;
-		default:
-		{
+		}
+		default: {
 			System.out.println("Invalid control loop type");
 			break;
 		}
