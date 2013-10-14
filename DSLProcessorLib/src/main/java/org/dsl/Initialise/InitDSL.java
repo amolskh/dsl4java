@@ -84,6 +84,10 @@ public class InitDSL
 				j=ControlLoopsFactory.processControlLoop(LoopType.IF,dslCommands,j);				
 			}
 
+			if (((String)dslCommands.get(j)).matches("While (.*)")){
+				j=ControlLoopsFactory.processControlLoop(LoopType.WHILE,dslCommands,j);				
+			}
+
 			while (it.hasNext()) {
 				Map.Entry pairs = (Map.Entry)it.next();
 
@@ -102,6 +106,7 @@ public class InitDSL
 			}
 		}		
 	}
+
 
 	private static Properties getConfig(String propFileName) throws IOException {
 		Properties prop = new Properties();

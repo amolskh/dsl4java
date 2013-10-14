@@ -16,6 +16,11 @@ public class ControlLoopsFactory {
 			k=controlLoop.perform(dslCommands, j);
 			break;
 		}
+		case WHILE: {			
+			controlLoop = new WhileControl();
+			k=controlLoop.perform(dslCommands, j);
+			break;
+		}
 		default: {
 			System.out.println("Invalid control loop type");
 			break;

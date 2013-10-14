@@ -6,7 +6,7 @@ import org.dsl.exception.DSLExecFailException;
 
 public abstract class ControlLoops {
 	private LoopType loopType = null;
-	
+
 	public LoopType getLoopType() {
 		return loopType;
 	}
@@ -16,9 +16,8 @@ public abstract class ControlLoops {
 	}
 
 	public ControlLoops(LoopType type) {
-	   this.loopType = type;	
+		this.loopType = type;	
 	}
-	
-	protected abstract int perform(List<String> dslCommands,int j) throws DSLExecFailException;
 
+	protected abstract int perform(List<String> dslCommands,int j) throws DSLExecFailException;
 }
