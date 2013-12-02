@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="12233" started-at="2013-10-14T12:20:29Z" finished-at="2013-10-14T12:20:41Z">
+  <suite name="Suite" duration-ms="15544" started-at="2013-12-02T17:22:37Z" finished-at="2013-12-02T17:22:52Z">
     <groups>
     </groups>
-    <test name="TC_005" duration-ms="12233" started-at="2013-10-14T12:20:29Z" finished-at="2013-10-14T12:20:41Z">
+    <test name="TC_021" duration-ms="15544" started-at="2013-12-02T17:22:37Z" finished-at="2013-12-02T17:22:52Z">
       <class name="org.sample.ParameterTest">
-        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@135537e]" name="createExcelHash" is-config="true" duration-ms="1475" started-at="2013-10-14T17:50:27Z" finished-at="2013-10-14T17:50:29Z">
+        <test-method status="PASS" signature="createExcelHash()[pri:0, instance:org.sample.ParameterTest@1fc894e]" name="createExcelHash" is-config="true" duration-ms="1862" started-at="2013-12-02T22:52:35Z" finished-at="2013-12-02T22:52:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createExcelHash -->
-        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@135537e]" name="testExecMethod" duration-ms="12219" started-at="2013-10-14T17:50:29Z" finished-at="2013-10-14T17:50:41Z">
+        <test-method status="PASS" signature="testExecMethod(java.lang.String)[pri:0, instance:org.sample.ParameterTest@1fc894e]" name="testExecMethod" duration-ms="15525" started-at="2013-12-02T22:52:37Z" finished-at="2013-12-02T22:52:52Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[TC_005]]>
+                <![CDATA[TC_021]]>
               </value>
             </param>
           </params>
@@ -23,6 +23,6 @@
           </reporter-output>
         </test-method> <!-- testExecMethod -->
       </class> <!-- org.sample.ParameterTest -->
-    </test> <!-- TC_005 -->
+    </test> <!-- TC_021 -->
   </suite> <!-- Suite -->
 </testng-results>

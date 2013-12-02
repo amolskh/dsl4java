@@ -1,5 +1,6 @@
 package org.selenium.methods;
 
+import java.util.List;
 import java.util.Set;
 import org.dsl.Initialise.InitDSL;
 import org.dsl.annotation.DSL;
@@ -7,13 +8,14 @@ import org.dsl.exception.DSLExecFailException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.selenium.driver.DriverInstance;
 import org.testng.Assert;
 
 public class SeleniumUtilities {
 	static WebDriver driver=null;
-	
+		
 	public WebElement getElement(String attribute,String value){
 		WebElement element=null;
 		switch(attribute){
@@ -46,6 +48,42 @@ public class SeleniumUtilities {
 		} 
 		return element;
 	}
+	
+	
+	
+	public List<WebElement> getElements(String attribute,String value){
+		List<WebElement> elements=null;
+		switch(attribute){
+		case "id":
+			elements=driver.findElements(By.id(value));
+			break;
+		case "className":
+			elements=driver.findElements(By.className(value));
+			break;
+		case "cssSelector":
+			elements=driver.findElements(By.cssSelector(value));
+			break;
+		case "linkText":
+			elements=driver.findElements(By.linkText(value));
+			break;
+		case "name":
+			elements=driver.findElements(By.name(value));
+			break;
+		case "partialLinkText":
+			elements=driver.findElements(By.partialLinkText(value));
+			break;
+		case "tagName":
+			elements=driver.findElements(By.tagName(value));
+			break;
+		case "xpath":
+			elements=driver.findElements(By.xpath(value));
+			break;
+		default:
+			System.out.println("Attribute not valid");
+		} 
+		return elements;
+	}
+	
 
 	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "Load {0}")
 	public void loadUrl(String url) {
@@ -213,5 +251,38 @@ public class SeleniumUtilities {
 			}
 		}
 		return parentWindowHandle;
+	}
+		
+	@DSL(commName = "SwitchToDefaultFrame",commRegex = {}, commSyntax = "Switch to default frame")
+	public void switchToDefaultFrame() {
+		driver.switchTo().defaultContent();
+	}
+	
+	@DSL(commName = "SwitchToFrame",commRegex = {".*","[a-zA-z]{1,}",".*"}, commSyntax = "Switch to {0} with {1} = {2}")
+	public void switchToFrame(String elementType,String attribute,String value) {
+		WebElement element=getElement(attribute,value);
+		if(element!= null){
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(element);
+		}  
+	}
+	
+	@DSL(commName = "HoverOver",commRegex = {".*","[a-zA-z]{1,}",".*"}, commSyntax = "HoverOver {0} with {1} = {2}")
+	public void hoverOver(String elementType,String attribute,String value) {
+		WebElement element=getElement(attribute,value);
+		if(element!= null){			
+			Actions action = new Actions(driver);
+			action.moveToElement(element).build().perform();			
+		}  
+	}
+	
+	@DSL(commName = "GetTotalNumberOfSimilarElements",commRegex = {".*","[a-zA-z]{1,}",".*"}, commSyntax = "Get total number of {0} with {1} = {2}")
+	public int getTotalNumberOfSimilarElements(String elementType, String attribute,String value){
+		List<WebElement> elements=getElements(attribute,value);
+		int listSize=0;
+		if(!elements.isEmpty()){
+			listSize=elements.size();		
+		}
+		return listSize;
 	}
 }

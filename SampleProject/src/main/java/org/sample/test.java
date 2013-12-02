@@ -15,45 +15,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class test {
-	
-	/*public static void main(String[] args) throws InterruptedException {
-		 WebDriver driver = new FirefoxDriver();		 
-		 driver.manage().window().maximize();
-		 driver.get("http://127.0.0.1/wordpress/wp-admin/");
-		 driver.findElement(By.id("user_login")).sendKeys("admin");
-		 Thread.sleep(2000);
-		 driver.findElement(By.id("user_pass")).sendKeys("test");
-		 driver.findElement(By.id("wp-submit")).click();
-		  System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());
-		 if(!driver.findElement(By.id("adv-settings")).isDisplayed()){
-				driver.findElement(By.id("show-settings-link")).click();
-		 }
-	     System.out.println(driver.findElement(By.id("adv-settings")).isDisplayed());		 
-		 driver.quit();
-	}*/	
-	
-	public static void main(String[] args){
-		String in="({SettingsSectionDisplayed} & {OpenSectionDisplayed})";
-		
-		
-		//String in = "({item1.test} & {item2.qa})";
 
-		Pattern p = Pattern.compile("\\{(.*?)\\}");
-		Matcher m = p.matcher(in);
-
-		while(m.find()) {
-			String temp=m.group(1);
-			String test ="InitDSL.getVariableValue({"+temp+"})";
-			in=in.replace("{"+temp+"}", test);
-		   // System.out.println(m.group(1));
-					
-		   // System.out.println(test);
-		}	
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver driver = new FirefoxDriver();		 
+		driver.manage().window().maximize();
+		driver.get("http://127.0.0.1/wordpress/wp-admin/");
+		driver.findElement(By.id("user_login")).sendKeys("admin");
+		Thread.sleep(3000);
+		driver.findElement(By.id("user_pass")).sendKeys("test");
+		driver.findElement(By.id("wp-submit")).click();
+		//Actions act = new Actions(driver);
+		//act.clickAndHold()(driver.findElement(By.xpath("//li[@id='wp-admin-bar-my-account']/a")));
+		//driver.findElement(By.xpath("//li[@id='wp-admin-bar-my-account']/a")).click();
+		//act.clickAndHold();
 		
-		System.out.println(in);
+		Actions clkAndHld = new Actions(driver);
+		clkAndHld.moveToElement(driver.findElement(By.xpath("//li[@id='wp-admin-bar-my-account']/a"))).build().perform();
 		
-		
+		driver.findElement(By.linkText("Log Out")).click();
 	}
+
+
 }

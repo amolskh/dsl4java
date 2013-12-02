@@ -83,7 +83,7 @@ public class InitDSL
 			if (((String)dslCommands.get(j)).matches("If (.*)")){
 				j=ControlLoopsFactory.processControlLoop(LoopType.IF,dslCommands,j);				
 			}
-
+			
 			if (((String)dslCommands.get(j)).matches("While (.*)")){
 				j=ControlLoopsFactory.processControlLoop(LoopType.WHILE,dslCommands,j);				
 			}
