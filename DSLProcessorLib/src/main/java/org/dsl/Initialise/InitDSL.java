@@ -107,7 +107,6 @@ public class InitDSL
 		}		
 	}
 
-
 	private static Properties getConfig(String propFileName) throws IOException {
 		Properties prop = new Properties();
 		InputStream in = InitDSL.class.getClassLoader().getResourceAsStream(propFileName);

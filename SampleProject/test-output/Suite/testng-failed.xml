@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]">
-  <parameter name="tc_Name" value="TC_020"/>
+  <parameter name="tc_Name" value="TC_021"/>
   <test name="TC_006(failed)">
     <parameter name="tc_Name" value="TC_006"/>
     <classes>

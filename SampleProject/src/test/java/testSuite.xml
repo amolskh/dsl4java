@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <suite name="Suite" parallel="false">
-    <test name="TC_021">
-        <parameter name="tc_Name" value="TC_021"/>
+    <test name="TC_001">
+        <parameter name="tc_Name" value="TC_001"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+    <test name="TC_003">
+        <parameter name="tc_Name" value="TC_003"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+    <test name="TC_005">
+        <parameter name="tc_Name" value="TC_005"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+    <test name="TC_007">
+        <parameter name="tc_Name" value="TC_007"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+    <test name="TC_008">
+        <parameter name="tc_Name" value="TC_008"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+    <test name="TC_009">
+        <parameter name="tc_Name" value="TC_009"/>
+        <classes>
+            <class name="org.sample.ParameterTest"/>
+        </classes>
+    </test>
+    <test name="TC_010">
+        <parameter name="tc_Name" value="TC_010"/>
         <classes>
             <class name="org.sample.ParameterTest"/>
         </classes>

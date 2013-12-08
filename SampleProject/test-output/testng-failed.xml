@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
-  <parameter name="tc_Name" value="TC_020"/>
-  <test name="TC_006(failed)">
-    <parameter name="tc_Name" value="TC_006"/>
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
       <class name="org.sample.ParameterTest">
         <methods>
           <include name="createExcelHash"/>
-          <include name="testExecMethod" invocation-numbers="0"/>
+          <include name="test"/>
         </methods>
       </class> <!-- org.sample.ParameterTest -->
     </classes>
-  </test> <!-- TC_006(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

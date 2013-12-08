@@ -19,16 +19,19 @@ public class Calculator {
 	public int multiply(int a, int b) {
 		return a * b;
 	}
+	
+	@DSL(commName = "Div", commRegex = { "(\\d){1,10}", "(\\d){1,10}" }, commSyntax = "Divide {0} by {1}")
+	public float divide(int a, int b) {
+		return a/b;
+	}
 
 	@DSL(commName = "Print", commRegex = {".*"}, commSyntax = "Print {0}")
 	public void print(String obj) {		
 		System.out.println(InitDSL.getVariableValue(obj));				
 	}	
 
-	/*@DSL(commName = "Concat", commRegex = {"[a-zA-z0-9{}%]{1,}","[a-zA-z0-9{}%]{1,}"}, commSyntax = "Concat {0} and {1}")
+	@DSL(commName = "Concat", commRegex = {"[a-zA-z0-9{}%]{1,}","[a-zA-z0-9{}%]{1,}"}, commSyntax = "Concat {0} and {1}")
 	public String concatString(String a, String b) {
-		System.out.println("****"+a.concat(b));
 		return a.concat(b);
-	}*/
-
+	}
 }

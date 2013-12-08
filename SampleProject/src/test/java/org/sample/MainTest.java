@@ -11,7 +11,7 @@ public class MainTest {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-	    ReadExcel.ReadTestcaseExcel("src/main/resources/Testcases.xlsx");		
-		CreateTestNGxml.testSuiteXML();
+	   ReadExcel.ReadTestcaseExcel("src/main/resources/Testcases.xlsx");	
+	   CreateTestNGxml.testSuiteXML();
 	}
 }

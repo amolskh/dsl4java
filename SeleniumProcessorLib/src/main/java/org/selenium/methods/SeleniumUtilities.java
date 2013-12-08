@@ -48,9 +48,7 @@ public class SeleniumUtilities {
 		} 
 		return element;
 	}
-	
-	
-	
+		
 	public List<WebElement> getElements(String attribute,String value){
 		List<WebElement> elements=null;
 		switch(attribute){
@@ -84,7 +82,6 @@ public class SeleniumUtilities {
 		return elements;
 	}
 	
-
 	@DSL(commName = "LoadUrl", commRegex = {".*"}, commSyntax = "Load {0}")
 	public void loadUrl(String url) {
 		driver.get(InitDSL.getVariableValue(url).toString());			

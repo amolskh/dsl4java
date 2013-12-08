@@ -6,7 +6,7 @@
       <class name="org.sample.ParameterTest">
         <methods>
           <include name="createExcelHash"/>
-          <include name="testExecMethod"/>
+          <include name="test"/>
         </methods>
       </class> <!-- org.sample.ParameterTest -->
     </classes>
